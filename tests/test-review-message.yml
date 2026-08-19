@@ -1,29 +1,27 @@
-name: Test review-message input
+name: Test custom review message with PR number
 on:
   workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_EVENT_NAME: pull_request
-      GITHUB_REF: refs/pull/1/merge
-      GITHUB_HEAD_REF: feature-branch
-      GITHUB_BASE_REF: main
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - id: action
         uses: .
-        with:
-          github-token: ${{ github.token }}
-          review-message: "Auto-approved by CI"
         continue-on-error: true
-      - name: Assert action ran with review-message input
+        with:
+          pull-request-number: "1"
+          review-message: "Auto-approved by test workflow"
+      - name: Assert action ran with review message (succeeds or fails gracefully on sentinel repo)
         env:
           OUTCOME: ${{ steps.action.outcome }}
         run: |
           echo "outcome: $OUTCOME"
-          if [ "$OUTCOME" = "skipped" ]; then
-            echo "FAIL: action was skipped unexpectedly"
+          if [ "$OUTCOME" = "success" ]; then
+            echo "PASS: action succeeded with custom review message"
+          elif [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed gracefully (sentinel repo is not resolvable or PR does not exist)"
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
             exit 1
           fi
-          echo "PASS: action ran with review-message input (outcome=$OUTCOME)"

@@ -1,0 +1,27 @@
+name: Test no PR context - workflow_dispatch without PR number
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        continue-on-error: true
+      - name: Assert action fails gracefully without PR context
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # Under workflow_dispatch with no pull-request-number input, the action
+          # cannot determine which PR to approve and should fail with an error message.
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed as expected (no PR context available)"
+          elif [ "$OUTCOME" = "success" ]; then
+            echo "FAIL: action should not succeed without a PR number or PR event context"
+            exit 1
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
+            exit 1
+          fi
