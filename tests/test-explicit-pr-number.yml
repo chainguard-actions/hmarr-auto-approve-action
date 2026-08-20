@@ -1,4 +1,4 @@
-name: Test basic usage (no PR number)
+name: Test with explicit pull-request-number
 on:
   workflow_dispatch:
 jobs:
@@ -9,17 +9,19 @@ jobs:
       - id: action
         uses: .
         continue-on-error: true
-        # No pull-request-number provided; action tries to read from pull_request event payload.
-        # Under workflow_dispatch there is no PR payload, so the action will fail gracefully.
-      - name: Assert action ran and failed gracefully (no PR context available)
+        with:
+          pull-request-number: "1"
+          # github-token defaults to github.token (real token injected by harness)
+          # GITHUB_REPOSITORY is a sentinel that doesn't exist, so the API call will 404
+      - name: Assert action ran (fails gracefully on sentinel repo)
         env:
           OUTCOME: ${{ steps.action.outcome }}
         run: |
           echo "outcome: $OUTCOME"
           if [ "$OUTCOME" = "failure" ]; then
-            echo "PASS: action failed gracefully as expected (no PR payload under workflow_dispatch)"
+            echo "PASS: action failed gracefully as expected (sentinel repo is not resolvable)"
           elif [ "$OUTCOME" = "success" ]; then
-            echo "PASS: action succeeded unexpectedly (sentinel repo may have resolved)"
+            echo "PASS: action succeeded (sentinel repo resolved unexpectedly)"
           else
             echo "FAIL: unexpected outcome '$OUTCOME'"
             exit 1
