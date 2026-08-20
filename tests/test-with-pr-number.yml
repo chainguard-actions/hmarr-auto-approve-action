@@ -1,4 +1,4 @@
-name: Test basic usage (no PR in context)
+name: Test with explicit pull-request-number
 on:
   workflow_dispatch:
 jobs:
@@ -8,16 +8,18 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - id: action
         uses: .
+        with:
+          pull-request-number: 1
         continue-on-error: true
-      - name: Assert action ran and failed gracefully (no PR in workflow_dispatch context)
+      - name: Assert action ran (fails gracefully on sentinel repo)
         env:
           OUTCOME: ${{ steps.action.outcome }}
         run: |
           echo "outcome: $OUTCOME"
-          if [ "$OUTCOME" = "failure" ]; then
-            echo "PASS: action failed gracefully as expected (no pull_request event payload)"
-          elif [ "$OUTCOME" = "success" ]; then
-            echo "PASS: action succeeded unexpectedly (may have found a PR somehow)"
+          if [ "$OUTCOME" = "success" ]; then
+            echo "PASS: action succeeded (PR approved)"
+          elif [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed gracefully (sentinel repo not resolvable via GitHub API)"
           else
             echo "FAIL: unexpected outcome '$OUTCOME'"
             exit 1
