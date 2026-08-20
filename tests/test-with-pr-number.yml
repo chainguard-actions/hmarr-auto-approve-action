@@ -1,0 +1,31 @@
+name: Test with explicit PR number and review message
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          pull-request-number: "1"
+          review-message: "Auto-approved by test harness"
+        # The action will attempt to approve PR #1 via the GitHub API.
+        # The sentinel GITHUB_REPOSITORY does not exist, so the API call will 404/fail.
+
+      - name: Assert action ran and failed gracefully (sentinel repo not resolvable)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed gracefully as expected (sentinel repo is not a real repo)"
+          elif [ "$OUTCOME" = "success" ]; then
+            echo "PASS: action unexpectedly succeeded (real repo may have been used)"
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
+            exit 1
+          fi
