@@ -9,7 +9,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
 | v3.0.0 | [`v3.0.0`](https://github.com/chainguard-actions/hmarr-auto-approve-action/tree/v3.0.0) | — |
-| v3.1.0 | [`v3.1.0`](https://github.com/chainguard-actions/hmarr-auto-approve-action/tree/v3.1.0) | — |
+| v3.1.0 | [`v3.1.0`](https://github.com/chainguard-actions/hmarr-auto-approve-action/tree/v3.1.0) | [`de8ae18`](https://github.com/hmarr/auto-approve-action/commit/de8ae18c173c131e182d4adf2c874d8d2308a85b) |
 | v3.2.0 | [`v3.2.0`](https://github.com/chainguard-actions/hmarr-auto-approve-action/tree/v3.2.0) | — |
 | v3.2.1 | [`v3.2.1`](https://github.com/chainguard-actions/hmarr-auto-approve-action/tree/v3.2.1) | [`4488819`](https://github.com/hmarr/auto-approve-action/commit/44888193675f29a83e04faf4002fa8c0b537b1e4) |
 | v4.0.0 | [`v4.0.0`](https://github.com/chainguard-actions/hmarr-auto-approve-action/tree/v4.0.0) | — |
