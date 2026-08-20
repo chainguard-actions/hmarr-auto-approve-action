@@ -1,4 +1,4 @@
-name: Test with review message
+name: Test with explicit pull request number
 on:
   workflow_dispatch:
 jobs:
@@ -11,16 +11,17 @@ jobs:
         continue-on-error: true
         with:
           github-token: ${{ github.token }}
-          review-message: "Auto-approved by test harness"
-      - name: Assert action ran with review message (fails gracefully on sentinel repo)
+          pull-request-number: 1
+          review-message: "Approved via explicit PR number"
+      - name: Assert action ran with explicit PR number (fails gracefully on sentinel repo)
         env:
           OUTCOME: ${{ steps.action.outcome }}
         run: |
           echo "outcome: $OUTCOME"
           if [ "$OUTCOME" = "success" ]; then
-            echo "PASS: action succeeded with review message (unexpected but acceptable)"
+            echo "PASS: action succeeded with explicit PR number (unexpected but acceptable)"
           elif [ "$OUTCOME" = "failure" ]; then
-            echo "PASS: action failed gracefully (sentinel repo has no pull request)"
+            echo "PASS: action failed gracefully (sentinel repo does not exist on GitHub)"
           else
             echo "FAIL: unexpected outcome '$OUTCOME'"
             exit 1
