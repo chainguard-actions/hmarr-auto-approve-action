@@ -12,7 +12,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | v3.1.0 | [`v3.1.0`](https://github.com/chainguard-actions/hmarr-auto-approve-action/tree/v3.1.0) | [`de8ae18`](https://github.com/hmarr/auto-approve-action/commit/de8ae18c173c131e182d4adf2c874d8d2308a85b) |
 | v3.2.0 | [`v3.2.0`](https://github.com/chainguard-actions/hmarr-auto-approve-action/tree/v3.2.0) | [`0902bf8`](https://github.com/hmarr/auto-approve-action/commit/0902bf83c300168cda5cd6856731a0fcb0e731c2) |
 | v3.2.1 | [`v3.2.1`](https://github.com/chainguard-actions/hmarr-auto-approve-action/tree/v3.2.1) | [`4488819`](https://github.com/hmarr/auto-approve-action/commit/44888193675f29a83e04faf4002fa8c0b537b1e4) |
-| v4.0.0 | [`v4.0.0`](https://github.com/chainguard-actions/hmarr-auto-approve-action/tree/v4.0.0) | — |
+| v4.0.0 | [`v4.0.0`](https://github.com/chainguard-actions/hmarr-auto-approve-action/tree/v4.0.0) | [`f0939ea`](https://github.com/hmarr/auto-approve-action/commit/f0939ea97e9205ef24d872e76833fa908a770363) |
 
 ## Privacy
 
