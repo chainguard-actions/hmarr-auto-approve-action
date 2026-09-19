@@ -1,7 +1,0 @@
-{
-  "owner": "hmarr",
-  "name": "auto-approve-action",
-  "visibility": "internal",
-  "description": "Automatically approve pull requests",
-  "block_publish": false
-}
