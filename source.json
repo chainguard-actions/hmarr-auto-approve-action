@@ -4,8 +4,13 @@
   "version": "v4.0.0",
   "commit_sha": "f0939ea97e9205ef24d872e76833fa908a770363",
   "url": "https://github.com/hmarr/auto-approve-action",
-  "policy_sha": "d636be7e43ef829af6e853da6b3c7566db9f72fe",
+  "policy_sha": "374911c4be584df24e6da57af2d990570ef0f859",
   "test_policy_sha": "843adf9e4b8f85d0c08b27b9d0b09dd094b54702",
   "test_agent_version": "2",
-  "harden_agent_version": "2"
+  "harden_agent_version": "2",
+  "dist_artifact": {
+    "gcs_uri": "gs://patch-actions-node-artifacts/dist-artifacts/hmarr/auto-approve-action/v4.0.0/sha256-88c9bb298254e54ac013148f885c59983b97b96232d027b1ff02bc58db05bb7d.tar.gz",
+    "sha256": "88c9bb298254e54ac013148f885c59983b97b96232d027b1ff02bc58db05bb7d",
+    "size_bytes": 260332
+  }
 }
